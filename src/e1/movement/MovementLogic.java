@@ -11,7 +11,7 @@ public interface MovementLogic {
      * @param col
      * @return true if the movement is performed, false otherwise
      */
-    void move(int row, int col);
+    boolean move(int row, int col) throws IndexOutOfBoundsException;
 
 
     /**
