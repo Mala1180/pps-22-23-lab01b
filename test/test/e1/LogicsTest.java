@@ -12,7 +12,7 @@ class LogicsTest {
 
     public static final int SIZE = 5;
     public static final Pair<Integer, Integer> knightStartingPosition = new Pair<>(0, 0);
-    public static final Pair<Integer, Integer> pawnStartingPosition = new Pair<>(3, 3);
+    public static final Pair<Integer, Integer> pawnStartingPosition = new Pair<>(2, 4);
 
     private Logics logics;
 
@@ -23,14 +23,25 @@ class LogicsTest {
 
     @Test
     void testRightKnightMovement() {
-        assertTrue(this.logics.hit(1,2));
-        assertTrue(this.logics.hit(2,4));
+        this.logics.hit(1, 2);
+        assertEquals(new Pair<>(1, 2), this.logics.getKnightPosition());
+        this.logics.hit(2, 4);
+        assertEquals(new Pair<>(2, 4), this.logics.getKnightPosition());
     }
 
     @Test
     void testWrongKnightMovement() {
-        assertFalse(this.logics.hit(1,1));
-        assertFalse(this.logics.hit(1,4));
-        assertFalse(this.logics.hit(3,2));
+        this.logics.hit(1, 1);
+        assertEquals(knightStartingPosition, this.logics.getKnightPosition());
+        this.logics.hit(1, 4);
+        assertEquals(knightStartingPosition, this.logics.getKnightPosition());
+        this.logics.hit(3, 2);
+        assertEquals(knightStartingPosition, this.logics.getKnightPosition());
+    }
+
+    @Test
+    void testKnightTakesPawn() {
+        assertFalse(this.logics.hit(1, 2));
+        assertTrue(this.logics.hit(2, 4));
     }
 }
