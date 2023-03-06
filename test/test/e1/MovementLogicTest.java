@@ -13,11 +13,8 @@ class MovementLogicTest {
     public static final int SIZE = 5;
     public static final Pair<Integer, Integer> knightStartingPosition = new Pair<>(0, 0);
 
-    protected MovementLogic movementLogic = new MovementLogic() {
-        @Override
-        public boolean canMove(Pair<Integer, Integer> from, Pair<Integer, Integer> to) {
-            throw new IndexOutOfBoundsException();
-        }
+    protected MovementLogic movementLogic = (from, to) -> {
+        throw new IndexOutOfBoundsException();
     };
 
     @Test

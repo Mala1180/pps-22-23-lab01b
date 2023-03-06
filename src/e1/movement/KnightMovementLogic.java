@@ -12,13 +12,13 @@ public class KnightMovementLogic implements MovementLogic {
 
     @Override
     public boolean canMove(Pair<Integer, Integer> from, Pair<Integer, Integer> to) {
-        int row = from.getX();
-        int col = from.getY();
+        int row = to.getX();
+        int col = to.getY();
         if (row < 0 || col < 0 || row >= this.size || col >= this.size) {
             throw new IndexOutOfBoundsException();
         }
-        int x = row - to.getX();
-        int y = col - to.getY();
+        int x = row - from.getX();
+        int y = col - from.getY();
         return x != 0 && y != 0 && Math.abs(x) + Math.abs(y) == 3;
     }
 
