@@ -8,6 +8,8 @@ import java.util.*;
 public class LogicsImpl implements Logics {
 
     private final Pair<Integer, Integer> pawn;
+    private Pair<Integer, Integer> knight;
+
     private final Random random = new Random();
     private final MovementLogic movementLogic;
     private final int size;
@@ -15,13 +17,15 @@ public class LogicsImpl implements Logics {
     public LogicsImpl(int size) {
         this.size = size;
         this.pawn = this.randomEmptyPosition();
-        movementLogic = new KnightMovementLogic(size, this.randomEmptyPosition());
+        this.knight = this.randomEmptyPosition();
+        movementLogic = new KnightMovementLogic(size);
     }
 
     public LogicsImpl(int size, Pair<Integer, Integer> knightStartingPosition, Pair<Integer, Integer> pawnStartingPosition) {
         this.size = size;
         this.pawn = pawnStartingPosition;
-        movementLogic = new KnightMovementLogic(size, knightStartingPosition);
+        this.knight = knightStartingPosition;
+        movementLogic = new KnightMovementLogic(size);
     }
 
     private final Pair<Integer, Integer> randomEmptyPosition() {
@@ -32,8 +36,8 @@ public class LogicsImpl implements Logics {
 
     @Override
     public boolean hit(int row, int col) {
-        boolean isMoved = this.movementLogic.move(row, col);
-        if (isMoved) {
+        if (this.movementLogic.canMove(this.knight, new Pair<>(row, col))) {
+            this.knight = new Pair<>(row, col);
             return this.pawn.equals(this.getKnightPosition());
         }
         return false;
@@ -51,6 +55,6 @@ public class LogicsImpl implements Logics {
 
     @Override
     public Pair<Integer, Integer> getKnightPosition() {
-        return this.movementLogic.getPosition();
+        return this.knight;
     }
 }

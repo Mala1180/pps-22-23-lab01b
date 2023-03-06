@@ -7,17 +7,10 @@ public interface MovementLogic {
     /**
      * attempt to move Knight on position row,col, if possible
      *
-     * @param row
-     * @param col
+     * @param from
+     * @param to
      * @return true if the movement is performed, false otherwise
      */
-    boolean move(int row, int col) throws IndexOutOfBoundsException;
-
-
-    /**
-     * Provides the knight position.
-     * @return the knight position
-     */
-    Pair<Integer, Integer> getPosition();
+    boolean canMove(Pair<Integer, Integer> from, Pair<Integer, Integer> to) throws IndexOutOfBoundsException;
 
 }

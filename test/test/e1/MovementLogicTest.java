@@ -6,8 +6,7 @@ import e1.movement.MovementLogic;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.*;
 
 class MovementLogicTest {
 
@@ -16,51 +15,41 @@ class MovementLogicTest {
 
     protected MovementLogic movementLogic = new MovementLogic() {
         @Override
-        public boolean move(int row, int col) {
+        public boolean canMove(Pair<Integer, Integer> from, Pair<Integer, Integer> to) {
             throw new IndexOutOfBoundsException();
-        }
-
-        @Override
-        public Pair<Integer, Integer> getPosition() {
-            return new Pair<>(0, 0);
         }
     };
 
     @Test
     void testOutOfBoundsMovement() {
-        assertThrows(IndexOutOfBoundsException.class, () -> this.movementLogic.move(-1, -1));
-        assertEquals(new Pair<>(0, 0), this.movementLogic.getPosition());
-        assertThrows(IndexOutOfBoundsException.class, () -> this.movementLogic.move(-1, 4));
-        assertEquals(new Pair<>(0, 0), this.movementLogic.getPosition());
-        assertThrows(IndexOutOfBoundsException.class, () -> this.movementLogic.move(-1, -2));
-        assertEquals(new Pair<>(0, 0), this.movementLogic.getPosition());
-        assertThrows(IndexOutOfBoundsException.class, () -> this.movementLogic.move(SIZE + 1, SIZE + 1));
-        assertEquals(new Pair<>(0, 0), this.movementLogic.getPosition());
+        assertThrows(IndexOutOfBoundsException.class, () ->
+                this.movementLogic.canMove(knightStartingPosition, new Pair<>(-1, -1)));
+        assertThrows(IndexOutOfBoundsException.class, () ->
+                this.movementLogic.canMove(knightStartingPosition, new Pair<>(-1, 4)));
+        assertThrows(IndexOutOfBoundsException.class, () ->
+                this.movementLogic.canMove(knightStartingPosition, new Pair<>(-1, -2)));
+        assertThrows(IndexOutOfBoundsException.class, () ->
+                this.movementLogic.canMove(knightStartingPosition, new Pair<>(SIZE + 1, SIZE + 1)));
     }
 
     static class KnightMovementLogicTest extends MovementLogicTest {
 
         @BeforeEach
         void setUp() {
-            movementLogic = new KnightMovementLogic(SIZE, knightStartingPosition);
+            movementLogic = new KnightMovementLogic(SIZE);
         }
 
         @Test
         void testRightKnightMovement() {
-            movementLogic.move(1, 2);
-            assertEquals(new Pair<>(1, 2), movementLogic.getPosition());
-            movementLogic.move(2, 4);
-            assertEquals(new Pair<>(2, 4), movementLogic.getPosition());
+            assertTrue(movementLogic.canMove(knightStartingPosition, new Pair<>(1, 2)));
+            assertTrue(movementLogic.canMove(new Pair<>(1, 2), new Pair<>(2, 4)));
         }
 
         @Test
         void testWrongKnightMovement() {
-            movementLogic.move(1, 1);
-            assertEquals(knightStartingPosition, movementLogic.getPosition());
-            movementLogic.move(1, 4);
-            assertEquals(knightStartingPosition, movementLogic.getPosition());
-            movementLogic.move(3, 2);
-            assertEquals(knightStartingPosition, movementLogic.getPosition());
+            assertFalse(movementLogic.canMove(knightStartingPosition, new Pair<>(1, 1)));
+            assertFalse(movementLogic.canMove(knightStartingPosition, new Pair<>(1, 4)));
+            assertFalse(movementLogic.canMove(knightStartingPosition, new Pair<>(3, 2)));
         }
 
     }
