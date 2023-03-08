@@ -2,7 +2,7 @@ package e1.movement;
 
 import e1.Pair;
 
-public interface MovementLogic {
+public interface MovementStrategy {
 
     /**
      * attempt to move Knight on position row,col, if possible

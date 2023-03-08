@@ -25,6 +25,5 @@ public interface Logics{
      */
     boolean hasPawn(int row, int col);
 
-
     Pair<Integer, Integer> getKnightPosition();
 }

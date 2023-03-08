@@ -2,11 +2,11 @@ package e1.movement;
 
 import e1.Pair;
 
-public class KnightMovementLogic implements MovementLogic {
+public class KnightMovementStrategy implements MovementStrategy {
 
     private final int size;
 
-    public KnightMovementLogic(int size) {
+    public KnightMovementStrategy(int size) {
         this.size = size;
     }
 

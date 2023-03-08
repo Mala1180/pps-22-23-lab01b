@@ -1,7 +1,7 @@
 package e1;
 
-import e1.movement.KnightMovementLogic;
-import e1.movement.MovementLogic;
+import e1.movement.KnightMovementStrategy;
+import e1.movement.MovementStrategy;
 
 import java.util.*;
 
@@ -11,21 +11,21 @@ public class LogicsImpl implements Logics {
     private Pair<Integer, Integer> knight;
 
     private final Random random = new Random();
-    private final MovementLogic movementLogic;
+    private final MovementStrategy movementStrategy;
     private final int size;
 
     public LogicsImpl(int size) {
         this.size = size;
         this.pawn = this.randomEmptyPosition();
         this.knight = this.randomEmptyPosition();
-        movementLogic = new KnightMovementLogic(size);
+        movementStrategy = new KnightMovementStrategy(size);
     }
 
     public LogicsImpl(int size, Pair<Integer, Integer> knightStartingPosition, Pair<Integer, Integer> pawnStartingPosition) {
         this.size = size;
         this.pawn = pawnStartingPosition;
         this.knight = knightStartingPosition;
-        movementLogic = new KnightMovementLogic(size);
+        movementStrategy = new KnightMovementStrategy(size);
     }
 
     private final Pair<Integer, Integer> randomEmptyPosition() {
@@ -36,7 +36,7 @@ public class LogicsImpl implements Logics {
 
     @Override
     public boolean hit(int row, int col) {
-        if (this.movementLogic.canMove(this.knight, new Pair<>(row, col))) {
+        if (this.movementStrategy.canMove(this.knight, new Pair<>(row, col))) {
             this.knight = new Pair<>(row, col);
             return this.pawn.equals(this.getKnightPosition());
         }

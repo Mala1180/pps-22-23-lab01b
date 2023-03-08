@@ -7,6 +7,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class LogicsTest {
 
@@ -37,6 +38,7 @@ class LogicsTest {
         assertEquals(knightStartingPosition, this.logics.getKnightPosition());
         this.logics.hit(3, 2);
         assertEquals(knightStartingPosition, this.logics.getKnightPosition());
+        assertThrows(IndexOutOfBoundsException.class, () -> this.logics.hit(-1, -1));
     }
 
     @Test
