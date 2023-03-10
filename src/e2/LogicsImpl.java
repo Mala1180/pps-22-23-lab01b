@@ -1,9 +1,8 @@
 package e2;
 
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 public class LogicsImpl implements Logics {
 
@@ -38,5 +37,16 @@ public class LogicsImpl implements Logics {
             return true;
         }
         return false;
+    }
+
+    @Override
+    public Set<Pair<Integer, Integer>> getNeighbours(int i, int j) {
+        return this.board.stream().filter(pair -> {
+            int x = pair.getX();
+            int y = pair.getY();
+            return !(x == i && y == j) &&
+                    (x == i - 1 || x == i || x == i + 1) &&
+                    (y == j - 1 || y == j || y == j + 1);
+        }).collect(Collectors.toUnmodifiableSet());
     }
 }
