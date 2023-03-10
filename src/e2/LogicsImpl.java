@@ -30,4 +30,13 @@ public class LogicsImpl implements Logics {
     public boolean hasMine(int i, int j) {
         return this.mines.contains(new Pair<>(i, j));
     }
+
+    @Override
+    public boolean hit(int i, int j) {
+        if (!this.hasMine(i, j)) {
+            this.board.remove(new Pair<>(i, j));
+            return true;
+        }
+        return false;
+    }
 }

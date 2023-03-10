@@ -6,4 +6,6 @@ public interface Logics {
 
     boolean hasMine(int i, int j);
 
+    boolean hit(int i, int j);
+
 }

@@ -17,7 +17,7 @@ class LogicsTest {
     }
 
     @Test
-    void populateBoardWithMines() {
+    void testPopulateBoardWithMines() {
         logics.addMine(0, 0);
         logics.addMine(1, 1);
         logics.addMine(5, 5);
@@ -26,5 +26,16 @@ class LogicsTest {
         assertTrue(logics.hasMine(5, 5));
     }
 
+    @Test
+    void testHitMine() {
+        testPopulateBoardWithMines();
+        assertFalse(logics.hit(0, 0));
+    }
+
+    @Test
+    void testHitEmptyCell() {
+        testPopulateBoardWithMines();
+        assertTrue(logics.hit(2, 2));
+    }
 
 }
