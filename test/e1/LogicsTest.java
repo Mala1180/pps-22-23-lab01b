@@ -1,13 +1,9 @@
-package test.e1;
+package e1;
 
-import e1.Logics;
-import e1.LogicsImpl;
-import e1.Pair;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class LogicsTest {
 

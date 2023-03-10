@@ -1,6 +1,5 @@
-package test.e1;
+package e1;
 
-import e1.Pair;
 import e1.movement.KnightMovementStrategy;
 import e1.movement.MovementStrategy;
 import org.junit.jupiter.api.BeforeEach;
