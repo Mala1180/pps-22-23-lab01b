@@ -1,11 +1,10 @@
 package e2.board;
 
-import e1.Pair;
+import e2.Pair;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -15,10 +14,16 @@ class BoardTest {
     public static final int SIZE = 7;
     public static final int NUMBER_OF_MINES = 3;
     private Board board;
+    public Set<Pair<Integer, Integer>> minePositions;
 
     @BeforeEach
     void setUp() {
-        this.board = new BoardImpl(SIZE);
+        minePositions = new HashSet<>(Set.of(
+                new Pair<>(0, 0),
+                new Pair<>(2, 2),
+                new Pair<>(5, 5)
+        ));
+        this.board = new BoardImpl(SIZE, minePositions);
     }
 
     @Test
@@ -53,33 +58,16 @@ class BoardTest {
 
 
     @Test
-    void testGetNeighbours() {
-        var neighbours = Set.of(
-                new Pair<>(0, 1),
-                new Pair<>(1, 0),
-                new Pair<>(1, 1)
+    void testGetAdjacentMines() {
+        var adjacentMines = Set.of(
+                new Pair<>(0, 0)
         );
-        assertEquals(neighbours, this.board.getNeighboursOf(0, 0));
+        assertEquals(adjacentMines, this.board.getAdjacentMines(1, 0));
 
-        neighbours = new HashSet<>(List.of(
-                new Pair<>(2, 2),
-                new Pair<>(2, 3),
-                new Pair<>(2, 4),
-                new Pair<>(3, 2),
-                new Pair<>(3, 4),
-                new Pair<>(4, 2),
-                new Pair<>(4, 3),
-                new Pair<>(4, 4)
-        ));
-
-        assertEquals(neighbours, this.board.getNeighboursOf(3, 3));
-
-        neighbours = new HashSet<>(List.of(
-                new Pair<>(SIZE - 2, SIZE - 2),
-                new Pair<>(SIZE - 2, SIZE - 1),
-                new Pair<>(SIZE - 1, SIZE - 2)
-        ));
-        assertEquals(neighbours, this.board.getNeighboursOf(SIZE - 1, SIZE - 1));
-
+        adjacentMines = Set.of(
+                new Pair<>(0, 0),
+                new Pair<>(2, 2)
+        );
+        assertEquals(adjacentMines, this.board.getAdjacentMines(1, 1));
     }
 }

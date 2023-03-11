@@ -87,8 +87,12 @@ public class GUI extends JFrame {
     private void drawBoard() {
         for (var entry : this.buttons.entrySet()) {
             // call the logic here
-            this.logics.getLabel(entry.getValue().getX(), entry.getValue().getY());
-            // if this button is a cell with counter, put the number
+            if (this.logics.isShown(entry.getValue().getX(), entry.getValue().getY())) {
+                entry.getKey().setEnabled(false);
+                var adjacentMinesNumber = this.logics.getAdjacentMinesNumber(entry.getValue().getX(), entry.getValue().getY());
+                // if this button is a cell with counter, put the number
+                entry.getKey().setText(adjacentMinesNumber + "");
+            }
             // if this button has a flag, put the flag
         }
     }

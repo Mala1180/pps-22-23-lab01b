@@ -1,6 +1,6 @@
 package e2.board;
 
-import e1.Pair;
+import e2.Pair;
 
 import java.util.Set;
 
@@ -16,6 +16,5 @@ public interface Board {
 
     boolean hasMine(int i, int j);
 
-    Set<Pair<Integer, Integer>> getNeighboursOf(int i, int j);
-
+    Set<Pair<Integer, Integer>> getAdjacentMines(int x, int y);
 }

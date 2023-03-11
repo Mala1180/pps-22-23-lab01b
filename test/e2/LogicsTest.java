@@ -37,6 +37,7 @@ class LogicsTest {
     @Test
     void testHitEmptyCell() {
         assertFalse(logics.hit(1, 1));
+        assertTrue(logics.isShown(1, 1));
     }
 
     @Test

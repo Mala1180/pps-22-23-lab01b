@@ -16,5 +16,8 @@ public interface Logics {
 
     boolean isMine(int x, int y);
 
-    String getLabel(int x, int y);
+    boolean isShown(int x, int y);
+
+    int getAdjacentMinesNumber(int x, int y);
+
 }

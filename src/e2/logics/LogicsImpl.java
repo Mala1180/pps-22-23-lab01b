@@ -5,9 +5,7 @@ import e2.board.Board;
 import e2.board.BoardImpl;
 import e2.board.Cell;
 
-import java.util.Random;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 public class LogicsImpl implements Logics {
 
@@ -17,21 +15,12 @@ public class LogicsImpl implements Logics {
         this.board = new BoardImpl(size);
     }
 
-    public LogicsImpl(int size, int numberOfMines) {
-        this.board = new BoardImpl(size);
-        Random random = new Random();
-        for (int i = 0; i < numberOfMines; i++) {
-            int x = random.nextInt(size);
-            int y = random.nextInt(size);
-            this.board.addMine(x, y);
-        }
+    public LogicsImpl(int size, Set<Pair<Integer, Integer>> minePositions) {
+        this.board = new BoardImpl(size, minePositions);
     }
 
-    public LogicsImpl(int size, Set<Pair<Integer, Integer>> minePositions) {
-        this.board = new BoardImpl(size);
-        for (var mine : minePositions) {
-            this.board.addMine(mine.getX(), mine.getY());
-        }
+    public LogicsImpl(int size, int numberOfMines) {
+        this.board = new BoardImpl(size, numberOfMines);
     }
 
     @Override
@@ -59,8 +48,13 @@ public class LogicsImpl implements Logics {
     }
 
     @Override
-    public String getLabel(int x, int y) {
-        return null;
+    public boolean isShown(int x, int y) {
+        return this.board.getCell(x, y).isShown();
+    }
+
+    @Override
+    public int getAdjacentMinesNumber(int x, int y) {
+        return this.board.getAdjacentMines(x, y).size();
     }
 
 }
