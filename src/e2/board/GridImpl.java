@@ -1,50 +1,51 @@
 package e2.board;
 
 import e2.Pair;
+import e2.board.cell.CellImpl;
 
 import java.util.*;
 import java.util.stream.Collectors;
 
-public class BoardImpl implements Board {
+public class GridImpl implements Grid {
 
-    private final Map<Pair<Integer, Integer>, Cell> cells = new HashMap<>();
+    private final Map<Pair<Integer, Integer>, CellImpl> cells = new HashMap<>();
 
-    private void populateBoard(int size) {
+    private void populateBoard(int size, Set<Pair<Integer, Integer>> minePositions) {
         for (int i = 0; i < size; i++) {
             for (int j = 0; j < size; j++) {
-                this.cells.put(new Pair<>(i, j), new Cell(false));
+                var position = new Pair<>(i, j);
+                this.cells.put(position, new CellImpl(minePositions.contains(position)));
             }
         }
     }
 
-    public BoardImpl(int size, int numberOfMines) {
-        populateBoard(size);
+    public GridImpl(int size, int numberOfMines) {
+        Set<Pair<Integer, Integer>> minePositions = new HashSet<>();
         Random random = new Random();
         for (int i = 0; i < numberOfMines; i++) {
             int x = random.nextInt(size);
             int y = random.nextInt(size);
-            this.addMine(x, y);
+            minePositions.add(new Pair<>(x, y));
         }
+        populateBoard(size, minePositions);
+
     }
 
-    public BoardImpl(int size) {
-        populateBoard(size);
+    public GridImpl(int size) {
+        populateBoard(size, Collections.emptySet());
     }
 
-    public BoardImpl(int size, Set<Pair<Integer, Integer>> minePositions) {
-        populateBoard(size);
-        for (var mine : minePositions) {
-            this.addMine(mine.getX(), mine.getY());
-        }
+    public GridImpl(int size, Set<Pair<Integer, Integer>> minePositions) {
+        populateBoard(size, minePositions);
     }
 
     @Override
-    public Set<Cell> getCells() {
+    public Set<CellImpl> getCells() {
         return new HashSet<>(this.cells.values());
     }
 
     @Override
-    public Cell getCell(final int i, final int j) {
+    public CellImpl getCell(final int i, final int j) {
         if (this.cells.containsKey(new Pair<>(i, j))) {
             return this.cells.get(new Pair<>(i, j));
         } else {
@@ -60,11 +61,6 @@ public class BoardImpl implements Board {
             throw new IllegalArgumentException("Cell not found");
         }
 
-    }
-
-    @Override
-    public void addMine(int i, int j) {
-        this.cells.get(new Pair<>(i, j)).setMine(true);
     }
 
     @Override

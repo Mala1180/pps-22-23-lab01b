@@ -1,18 +1,17 @@
 package e2.board;
 
 import e2.Pair;
+import e2.board.cell.CellImpl;
 
 import java.util.Set;
 
-public interface Board {
+public interface Grid {
 
-    Set<Cell> getCells();
+    Set<CellImpl> getCells();
 
-    Cell getCell(int i, int j);
+    CellImpl getCell(int i, int j);
 
     void showCell(int i, int j);
-
-    void addMine(int i, int j);
 
     boolean hasMine(int i, int j);
 

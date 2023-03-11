@@ -1,32 +1,40 @@
-package e2.board;
+package e2.board.cell;
 
-public class Cell {
+public class CellImpl implements Cell {
 
     private boolean isShown;
-    private boolean isMine;
+    private final boolean isMine;
     private boolean isFlag;
 
-
-    public Cell(final boolean isMine) {
+    public CellImpl(final boolean isMine) {
         this.isMine = isMine;
         this.isShown = false;
         this.isFlag = false;
     }
 
+    @Override
     public boolean isMine() {
         return isMine;
     }
 
-    public void setMine(final boolean isMine) {
-        this.isMine = isMine;
-    }
-
+    @Override
     public boolean isShown() {
         return isShown;
     }
 
+    @Override
     public void show() {
         this.isShown = true;
+    }
+
+    @Override
+    public boolean isFlag() {
+        return this.isFlag;
+    }
+
+    @Override
+    public void setFlag(boolean isFlag) {
+        this.isFlag = isFlag;
     }
 
     @Override
@@ -36,13 +44,5 @@ public class Cell {
                 ", isMine=" + isMine +
                 ", isFlag='" + isFlag + '\'' +
                 '}';
-    }
-
-    public boolean isFlag() {
-        return this.isFlag;
-    }
-
-    public void setFlag(boolean isFlag) {
-        this.isFlag = isFlag;
     }
 }

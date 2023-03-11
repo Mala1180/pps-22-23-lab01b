@@ -9,11 +9,11 @@ import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class BoardTest {
+class GridTest {
 
     public static final int SIZE = 7;
     public static final int NUMBER_OF_MINES = 3;
-    private Board board;
+    private Grid grid;
     public Set<Pair<Integer, Integer>> minePositions;
 
     @BeforeEach
@@ -23,37 +23,34 @@ class BoardTest {
                 new Pair<>(2, 2),
                 new Pair<>(5, 5)
         ));
-        this.board = new BoardImpl(SIZE, minePositions);
+        this.grid = new GridImpl(SIZE, minePositions);
     }
 
     @Test
     void testPopulateBoardWithMines() {
-        this.board.addMine(0, 0);
-        this.board.addMine(1, 1);
-        this.board.addMine(5, 5);
-        assertTrue(this.board.hasMine(0, 0));
-        assertTrue(this.board.hasMine(1, 1));
-        assertTrue(this.board.hasMine(5, 5));
+        assertTrue(this.grid.hasMine(0, 0));
+        assertTrue(this.grid.hasMine(2, 2));
+        assertTrue(this.grid.hasMine(5, 5));
     }
 
     @Test
     void testGetNotExistingCell() {
-        assertThrows(IllegalArgumentException.class, () -> this.board.getCell(SIZE, SIZE));
-        assertThrows(IllegalArgumentException.class, () -> this.board.getCell(-1, -1));
+        assertThrows(IllegalArgumentException.class, () -> this.grid.getCell(SIZE, SIZE));
+        assertThrows(IllegalArgumentException.class, () -> this.grid.getCell(-1, -1));
     }
 
     @Test
     void testShowCell() {
-        this.board.showCell(0, 0);
-        this.board.showCell(3, 3);
-        assertTrue(this.board.getCell(0, 0).isShown());
-        assertTrue(this.board.getCell(3, 3).isShown());
+        this.grid.showCell(0, 0);
+        this.grid.showCell(3, 3);
+        assertTrue(this.grid.getCell(0, 0).isShown());
+        assertTrue(this.grid.getCell(3, 3).isShown());
     }
 
     @Test
     void testShowNotExistingCell() {
-        assertThrows(IllegalArgumentException.class, () -> this.board.showCell(SIZE, SIZE));
-        assertThrows(IllegalArgumentException.class, () -> this.board.showCell(-1, -1));
+        assertThrows(IllegalArgumentException.class, () -> this.grid.showCell(SIZE, SIZE));
+        assertThrows(IllegalArgumentException.class, () -> this.grid.showCell(-1, -1));
     }
 
     @Test
@@ -63,7 +60,7 @@ class BoardTest {
                 new Pair<>(1, 0),
                 new Pair<>(1, 1)
         );
-        assertEquals(neighbours, this.board.getAdjacent(0, 0));
+        assertEquals(neighbours, this.grid.getAdjacent(0, 0));
 
         neighbours = new HashSet<>(Set.of(
                 new Pair<>(2, 2),
@@ -76,14 +73,14 @@ class BoardTest {
                 new Pair<>(4, 4)
         ));
 
-        assertEquals(neighbours, this.board.getAdjacent(3, 3));
+        assertEquals(neighbours, this.grid.getAdjacent(3, 3));
 
         neighbours = new HashSet<>(Set.of(
                 new Pair<>(SIZE - 2, SIZE - 2),
                 new Pair<>(SIZE - 2, SIZE - 1),
                 new Pair<>(SIZE - 1, SIZE - 2)
         ));
-        assertEquals(neighbours, this.board.getAdjacent(SIZE - 1, SIZE - 1));
+        assertEquals(neighbours, this.grid.getAdjacent(SIZE - 1, SIZE - 1));
 
     }
 
@@ -92,12 +89,12 @@ class BoardTest {
         var adjacentMines = Set.of(
                 new Pair<>(0, 0)
         );
-        assertEquals(adjacentMines, this.board.getAdjacentMines(1, 0));
+        assertEquals(adjacentMines, this.grid.getAdjacentMines(1, 0));
 
         adjacentMines = Set.of(
                 new Pair<>(0, 0),
                 new Pair<>(2, 2)
         );
-        assertEquals(adjacentMines, this.board.getAdjacentMines(1, 1));
+        assertEquals(adjacentMines, this.grid.getAdjacentMines(1, 1));
     }
 }
