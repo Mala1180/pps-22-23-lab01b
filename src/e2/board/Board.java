@@ -16,5 +16,8 @@ public interface Board {
 
     boolean hasMine(int i, int j);
 
+    Set<Pair<Integer, Integer>> getAdjacent(int x, int y);
+
     Set<Pair<Integer, Integer>> getAdjacentMines(int x, int y);
+
 }

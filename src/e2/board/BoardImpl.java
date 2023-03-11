@@ -73,17 +73,22 @@ public class BoardImpl implements Board {
     }
 
     @Override
-    public Set<Pair<Integer, Integer>> getAdjacentMines(int x, int y) {
-        return this.cells.entrySet().stream()
-                .filter(entry -> entry.getValue().isMine())
-                .filter(entry -> {
-                    int cellX = entry.getKey().getX();
-                    int cellY = entry.getKey().getY();
+    public Set<Pair<Integer, Integer>> getAdjacent(int x, int y) {
+        return this.cells.keySet().stream()
+                .filter(cell -> {
+                    int cellX = cell.getX();
+                    int cellY = cell.getY();
                     return !(cellX == x && cellY == y) &&
                             (cellX == x - 1 || cellX == x || cellX == x + 1) &&
                             (cellY == y - 1 || cellY == y || cellY == y + 1);
                 })
-                .map(Map.Entry::getKey)
+                .collect(Collectors.toUnmodifiableSet());
+    }
+
+    @Override
+    public Set<Pair<Integer, Integer>> getAdjacentMines(int x, int y) {
+        return this.getAdjacent(x, y).stream()
+                .filter(position -> this.hasMine(position.getX(), position.getY()))
                 .collect(Collectors.toUnmodifiableSet());
     }
 

@@ -56,6 +56,36 @@ class BoardTest {
         assertThrows(IllegalArgumentException.class, () -> this.board.showCell(-1, -1));
     }
 
+    @Test
+    void testGetAdjacent() {
+        var neighbours = Set.of(
+                new Pair<>(0, 1),
+                new Pair<>(1, 0),
+                new Pair<>(1, 1)
+        );
+        assertEquals(neighbours, this.board.getAdjacent(0, 0));
+
+        neighbours = new HashSet<>(Set.of(
+                new Pair<>(2, 2),
+                new Pair<>(2, 3),
+                new Pair<>(2, 4),
+                new Pair<>(3, 2),
+                new Pair<>(3, 4),
+                new Pair<>(4, 2),
+                new Pair<>(4, 3),
+                new Pair<>(4, 4)
+        ));
+
+        assertEquals(neighbours, this.board.getAdjacent(3, 3));
+
+        neighbours = new HashSet<>(Set.of(
+                new Pair<>(SIZE - 2, SIZE - 2),
+                new Pair<>(SIZE - 2, SIZE - 1),
+                new Pair<>(SIZE - 1, SIZE - 2)
+        ));
+        assertEquals(neighbours, this.board.getAdjacent(SIZE - 1, SIZE - 1));
+
+    }
 
     @Test
     void testGetAdjacentMines() {

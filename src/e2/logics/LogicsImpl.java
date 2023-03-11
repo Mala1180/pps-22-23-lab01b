@@ -27,6 +27,13 @@ public class LogicsImpl implements Logics {
     public boolean hit(int x, int y) {
         this.board.showCell(x, y);
         if (!this.board.hasMine(x, y)) {
+            if(this.getAdjacentMinesNumber(x, y) == 0) {
+                this.board.getAdjacent(x, y).forEach(pair -> {
+//                    if (!this.isShown(pair.getFirst(), pair.getSecond())) {
+//                        this.hit(pair.getFirst(), pair.getSecond());
+//                    }
+                });
+            }
             return false;
         }
         return true;
