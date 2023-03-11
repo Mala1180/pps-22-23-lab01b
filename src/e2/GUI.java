@@ -53,12 +53,7 @@ public class GUI extends JFrame {
                 if (bt.isEnabled()) {
                     final Pair<Integer, Integer> pos = buttons.get(bt);
                     // call the logic here to put/remove a flag
-                    var isFlagged = logics.toggleFlag(pos.getX(), pos.getY());
-                    if (isFlagged) {
-                        bt.setText("F");
-                    } else {
-                        bt.setText(" ");
-                    }
+                    logics.toggleFlag(pos.getX(), pos.getY());
                 }
                 drawBoard();
             }
@@ -98,8 +93,14 @@ public class GUI extends JFrame {
                 var adjacentMinesNumber = this.logics.getAdjacentMinesNumber(entry.getValue().getX(), entry.getValue().getY());
                 // if this button is a cell with counter, put the number
                 entry.getKey().setText(adjacentMinesNumber + "");
+                // if this button has a flag, put the flag
+            } else {
+                if (this.logics.isFlag(entry.getValue().getX(), entry.getValue().getY())) {
+                    entry.getKey().setText("F");
+                } else {
+                    entry.getKey().setText(" ");
+                }
             }
-            // if this button has a flag, put the flag
         }
     }
 

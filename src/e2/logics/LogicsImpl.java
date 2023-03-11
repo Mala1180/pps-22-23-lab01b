@@ -1,9 +1,9 @@
 package e2.logics;
 
 import e2.Pair;
-import e2.board.Grid;
-import e2.board.GridImpl;
-import e2.board.cell.CellImpl;
+import e2.grid.Grid;
+import e2.grid.GridImpl;
+import e2.grid.cell.CellImpl;
 
 import java.util.Set;
 
@@ -26,7 +26,7 @@ public class LogicsImpl implements Logics {
     @Override
     public boolean hit(int x, int y) {
         this.grid.showCell(x, y);
-        if (!this.grid.hasMine(x, y)) {
+        if (!this.grid.isMine(x, y)) {
             if (this.getAdjacentMinesNumber(x, y) == 0) {
                 this.grid.getAdjacent(x, y).forEach(adjacent -> {
                     int adjacentX = adjacent.getX();
@@ -55,7 +55,7 @@ public class LogicsImpl implements Logics {
 
     @Override
     public boolean isMine(int x, int y) {
-        return this.grid.hasMine(x, y);
+        return this.grid.isMine(x, y);
     }
 
     @Override
@@ -71,6 +71,11 @@ public class LogicsImpl implements Logics {
     @Override
     public boolean toggleFlag(int x, int y) {
         this.grid.toggleFlag(x, y);
+        return this.isFlag(x, y);
+    }
+
+    @Override
+    public boolean isFlag(int x, int y) {
         return this.grid.getCell(x, y).isFlag();
     }
 

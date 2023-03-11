@@ -1,4 +1,4 @@
-package e2.board.cell;
+package e2.grid.cell;
 
 public class CellImpl implements Cell {
 

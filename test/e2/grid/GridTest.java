@@ -1,4 +1,4 @@
-package e2.board;
+package e2.grid;
 
 import e2.Pair;
 import org.junit.jupiter.api.BeforeEach;
@@ -28,9 +28,9 @@ class GridTest {
 
     @Test
     void testPopulateBoardWithMines() {
-        assertTrue(this.grid.hasMine(0, 0));
-        assertTrue(this.grid.hasMine(2, 2));
-        assertTrue(this.grid.hasMine(5, 5));
+        assertTrue(this.grid.isMine(0, 0));
+        assertTrue(this.grid.isMine(2, 2));
+        assertTrue(this.grid.isMine(5, 5));
     }
 
     @Test

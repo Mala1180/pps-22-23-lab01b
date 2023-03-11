@@ -1,7 +1,7 @@
-package e2.board;
+package e2.grid;
 
 import e2.Pair;
-import e2.board.cell.CellImpl;
+import e2.grid.cell.CellImpl;
 
 import java.util.Set;
 
@@ -13,7 +13,7 @@ public interface Grid {
 
     void showCell(int i, int j);
 
-    boolean hasMine(int i, int j);
+    boolean isMine(int i, int j);
 
     Set<Pair<Integer, Integer>> getAdjacent(int x, int y);
 

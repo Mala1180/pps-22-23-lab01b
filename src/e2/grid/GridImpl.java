@@ -1,8 +1,8 @@
-package e2.board;
+package e2.grid;
 
 import e2.Pair;
-import e2.board.cell.CellImpl;
-import e2.board.cell.CellType;
+import e2.grid.cell.CellImpl;
+import e2.grid.cell.CellType;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -67,7 +67,7 @@ public class GridImpl implements Grid {
     }
 
     @Override
-    public boolean hasMine(int i, int j) {
+    public boolean isMine(int i, int j) {
         return this.cells.get(new Pair<>(i, j)).isMine();
     }
 
@@ -87,7 +87,7 @@ public class GridImpl implements Grid {
     @Override
     public Set<Pair<Integer, Integer>> getAdjacentMines(int x, int y) {
         return this.getAdjacent(x, y).stream()
-                .filter(position -> this.hasMine(position.getX(), position.getY()))
+                .filter(position -> this.isMine(position.getX(), position.getY()))
                 .collect(Collectors.toUnmodifiableSet());
     }
 

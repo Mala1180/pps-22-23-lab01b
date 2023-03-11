@@ -22,4 +22,5 @@ public interface Logics {
 
     boolean toggleFlag(int x, int y);
 
+    boolean isFlag(int x, int y);
 }
