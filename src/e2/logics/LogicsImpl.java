@@ -1,4 +1,4 @@
-package e2;
+package e2.logics;
 
 import e2.board.Board;
 import e2.board.BoardImpl;

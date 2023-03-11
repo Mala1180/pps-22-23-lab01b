@@ -1,5 +1,7 @@
 package e2;
 
+import e2.logics.Logics;
+import e2.logics.LogicsImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
