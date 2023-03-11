@@ -2,6 +2,7 @@ package e2;
 
 import e2.board.Board;
 import e2.board.BoardImpl;
+import e2.board.Cell;
 
 import java.util.Random;
 
@@ -30,6 +31,13 @@ public class LogicsImpl implements Logics {
             return true;
         }
         return false;
+    }
+
+    @Override
+    public boolean isGameWon() {
+        return this.board.getCells().stream()
+                .filter(cell -> !cell.isMine())
+                .allMatch(Cell::isShown);
     }
 
 }

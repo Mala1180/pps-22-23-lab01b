@@ -46,6 +46,13 @@ public class BoardImpl implements Board {
 
     @Override
     public void showCell(int i, int j) {
+        this.cells.stream().filter(cell -> cell.getX() == i && cell.getY() == j)
+                .findFirst()
+                .ifPresent(cell -> cell.setShown(true));
+    }
 
+    @Override
+    public Set<Cell> getCells() {
+        return this.cells;
     }
 }

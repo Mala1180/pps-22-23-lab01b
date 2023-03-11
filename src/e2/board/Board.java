@@ -1,8 +1,13 @@
 package e2.board;
 
+import java.util.Arrays;
 import java.util.Set;
 
 public interface Board {
+
+    Set<Cell> getCells();
+
+    void showCell(int i, int j);
 
     void addMine(int i, int j);
 
@@ -10,5 +15,4 @@ public interface Board {
 
     Set<Cell> getNeighboursOf(int i, int j);
 
-    void showCell(int i, int j);
 }

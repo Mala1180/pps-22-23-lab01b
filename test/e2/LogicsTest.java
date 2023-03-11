@@ -3,9 +3,6 @@ package e2;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.util.HashSet;
-import java.util.List;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 class LogicsTest {
@@ -18,6 +15,17 @@ class LogicsTest {
     void setUp() {
         logics = new LogicsImpl(SIZE);
     }
+
+    @Test
+    void testGameWon() {
+        for (int i = 0; i < SIZE; i++) {
+            for (int j = 0; j < SIZE; j++) {
+                System.out.println(logics.hit(i, j));
+            }
+        }
+        assertFalse(logics.isGameWon());
+    }
+
 
 //    @Test
 //    void testHitMine() {
