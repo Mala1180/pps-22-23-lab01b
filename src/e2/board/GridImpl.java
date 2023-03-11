@@ -2,6 +2,7 @@ package e2.board;
 
 import e2.Pair;
 import e2.board.cell.CellImpl;
+import e2.board.cell.CellType;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -14,7 +15,9 @@ public class GridImpl implements Grid {
         for (int i = 0; i < size; i++) {
             for (int j = 0; j < size; j++) {
                 var position = new Pair<>(i, j);
-                this.cells.put(position, new CellImpl(minePositions.contains(position)));
+                boolean isMine = minePositions.contains(position);
+                var cell = new CellImpl(isMine ? CellType.MINE : CellType.EMPTY);
+                this.cells.put(position, cell);
             }
         }
     }

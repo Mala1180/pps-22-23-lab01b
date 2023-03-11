@@ -3,18 +3,18 @@ package e2.board.cell;
 public class CellImpl implements Cell {
 
     private boolean isShown;
-    private final boolean isMine;
+    private final CellType type;
     private boolean isFlag;
 
-    public CellImpl(final boolean isMine) {
-        this.isMine = isMine;
+    public CellImpl(final CellType cellType) {
+        this.type = cellType;
         this.isShown = false;
         this.isFlag = false;
     }
 
     @Override
     public boolean isMine() {
-        return isMine;
+        return this.type == CellType.MINE;
     }
 
     @Override
@@ -41,7 +41,7 @@ public class CellImpl implements Cell {
     public String toString() {
         return "Cell{" +
                 "isShown=" + isShown +
-                ", isMine=" + isMine +
+                ", type=" + type +
                 ", isFlag='" + isFlag + '\'' +
                 '}';
     }

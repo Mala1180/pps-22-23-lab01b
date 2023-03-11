@@ -33,7 +33,7 @@ public class LogicsImpl implements Logics {
                     int adjacentY = adjacent.getY();
                     if (!this.isShown(adjacentX, adjacentY) &&
                             !this.isMine(adjacentX, adjacentY) &&
-                            !this.isFlag(adjacentX, adjacentY)) {
+                            !this.grid.getCell(adjacentX, adjacentY).isFlag()) {
                         this.hit(adjacentX, adjacentY);
                     }
                 });
@@ -71,11 +71,6 @@ public class LogicsImpl implements Logics {
     @Override
     public boolean toggleFlag(int x, int y) {
         this.grid.toggleFlag(x, y);
-        return this.isFlag(x, y);
-    }
-
-    @Override
-    public boolean isFlag(int x, int y) {
         return this.grid.getCell(x, y).isFlag();
     }
 
