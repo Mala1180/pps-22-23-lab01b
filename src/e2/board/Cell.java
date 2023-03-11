@@ -4,11 +4,13 @@ public class Cell {
 
     private boolean isShown;
     private boolean isMine;
-    private String label;
+    private boolean isFlag;
+
 
     public Cell(final boolean isMine) {
         this.isMine = isMine;
         this.isShown = false;
+        this.isFlag = false;
     }
 
     public boolean isMine() {
@@ -32,7 +34,15 @@ public class Cell {
         return "Cell{" +
                 "isShown=" + isShown +
                 ", isMine=" + isMine +
-                ", label='" + label + '\'' +
+                ", isFlag='" + isFlag + '\'' +
                 '}';
+    }
+
+    public boolean isFlag() {
+        return this.isFlag;
+    }
+
+    public void setFlag(boolean isFlag) {
+        this.isFlag = isFlag;
     }
 }

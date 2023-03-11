@@ -31,7 +31,7 @@ public class BoardImpl implements Board {
         populateBoard(size);
     }
 
-    public BoardImpl(int size, Set<e2.Pair<Integer, Integer>> minePositions) {
+    public BoardImpl(int size, Set<Pair<Integer, Integer>> minePositions) {
         populateBoard(size);
         for (var mine : minePositions) {
             this.addMine(mine.getX(), mine.getY());
@@ -90,6 +90,11 @@ public class BoardImpl implements Board {
         return this.getAdjacent(x, y).stream()
                 .filter(position -> this.hasMine(position.getX(), position.getY()))
                 .collect(Collectors.toUnmodifiableSet());
+    }
+
+    @Override
+    public void toggleFlag(int x, int y) {
+        this.cells.get(new Pair<>(x, y)).setFlag(!this.cells.get(new Pair<>(x, y)).isFlag());
     }
 
 

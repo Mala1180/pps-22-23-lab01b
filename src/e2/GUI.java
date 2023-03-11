@@ -53,6 +53,12 @@ public class GUI extends JFrame {
                 if (bt.isEnabled()) {
                     final Pair<Integer, Integer> pos = buttons.get(bt);
                     // call the logic here to put/remove a flag
+                    var isFlagged = logics.toggleFlag(pos.getX(), pos.getY());
+                    if (isFlagged) {
+                        bt.setText("F");
+                    } else {
+                        bt.setText(" ");
+                    }
                 }
                 drawBoard();
             }

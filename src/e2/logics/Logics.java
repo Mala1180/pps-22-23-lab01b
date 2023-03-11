@@ -20,4 +20,5 @@ public interface Logics {
 
     int getAdjacentMinesNumber(int x, int y);
 
+    boolean toggleFlag(int x, int y);
 }

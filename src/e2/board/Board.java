@@ -20,4 +20,5 @@ public interface Board {
 
     Set<Pair<Integer, Integer>> getAdjacentMines(int x, int y);
 
+    void toggleFlag(int x, int y);
 }

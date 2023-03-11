@@ -27,11 +27,13 @@ public class LogicsImpl implements Logics {
     public boolean hit(int x, int y) {
         this.board.showCell(x, y);
         if (!this.board.hasMine(x, y)) {
-            if(this.getAdjacentMinesNumber(x, y) == 0) {
-                this.board.getAdjacent(x, y).forEach(pair -> {
-//                    if (!this.isShown(pair.getFirst(), pair.getSecond())) {
-//                        this.hit(pair.getFirst(), pair.getSecond());
-//                    }
+            if (this.getAdjacentMinesNumber(x, y) == 0) {
+                this.board.getAdjacent(x, y).forEach(adjacent -> {
+                    int adjacentX = adjacent.getX();
+                    int adjacentY = adjacent.getY();
+                    if (!this.isShown(adjacentX, adjacentY) && !this.isMine(adjacentX, adjacentY)) {
+                        this.hit(adjacentX, adjacentY);
+                    }
                 });
             }
             return false;
@@ -62,6 +64,12 @@ public class LogicsImpl implements Logics {
     @Override
     public int getAdjacentMinesNumber(int x, int y) {
         return this.board.getAdjacentMines(x, y).size();
+    }
+
+    @Override
+    public boolean toggleFlag(int x, int y) {
+        this.board.toggleFlag(x, y);
+        return this.board.getCell(x, y).isFlag();
     }
 
 }
