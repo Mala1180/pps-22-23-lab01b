@@ -31,7 +31,9 @@ public class LogicsImpl implements Logics {
                 this.board.getAdjacent(x, y).forEach(adjacent -> {
                     int adjacentX = adjacent.getX();
                     int adjacentY = adjacent.getY();
-                    if (!this.isShown(adjacentX, adjacentY) && !this.isMine(adjacentX, adjacentY)) {
+                    if (!this.isShown(adjacentX, adjacentY) &&
+                            !this.isMine(adjacentX, adjacentY) &&
+                            !this.isFlag(adjacentX, adjacentY)) {
                         this.hit(adjacentX, adjacentY);
                     }
                 });
@@ -69,6 +71,11 @@ public class LogicsImpl implements Logics {
     @Override
     public boolean toggleFlag(int x, int y) {
         this.board.toggleFlag(x, y);
+        return this.isFlag(x, y);
+    }
+
+    @Override
+    public boolean isFlag(int x, int y) {
         return this.board.getCell(x, y).isFlag();
     }
 
