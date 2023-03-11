@@ -3,14 +3,16 @@ package e2.logics;
 public interface Logics {
 
     /**
-     * @param i row
-     * @param j column
+     * @param x row
+     * @param y column
      * @return false if the cell is empty, true if it is a mine
      */
-    boolean hit(int i, int j);
+    boolean hit(int x, int y);
 
     /**
      * @return true if all cells except mines are shown, false otherwise
      */
     boolean isGameWon();
+
+    boolean isMine(int x, int y);
 }

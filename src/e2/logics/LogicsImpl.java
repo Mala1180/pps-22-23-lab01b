@@ -25,12 +25,12 @@ public class LogicsImpl implements Logics {
     }
 
     @Override
-    public boolean hit(int i, int j) {
-        if (!this.board.hasMine(i, j)) {
-            this.board.showCell(i, j);
-            return true;
+    public boolean hit(int x, int y) {
+        if (!this.board.hasMine(x, y)) {
+            this.board.showCell(x, y);
+            return false;
         }
-        return false;
+        return true;
     }
 
     @Override
@@ -38,6 +38,11 @@ public class LogicsImpl implements Logics {
         return this.board.getCells().stream()
                 .filter(cell -> !cell.isMine())
                 .allMatch(Cell::isShown);
+    }
+
+    @Override
+    public boolean isMine(int x, int y) {
+        return this.board.hasMine(x, y);
     }
 
 }
