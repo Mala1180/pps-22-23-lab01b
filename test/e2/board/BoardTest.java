@@ -1,5 +1,6 @@
 package e2.board;
 
+import e1.Pair;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -14,6 +15,7 @@ class BoardTest {
     public static final int SIZE = 7;
     public static final int NUMBER_OF_MINES = 3;
     private Board board;
+
     @BeforeEach
     void setUp() {
         this.board = new BoardImpl(SIZE);
@@ -30,41 +32,52 @@ class BoardTest {
     }
 
     @Test
+    void testGetNotExistingCell() {
+        assertThrows(IllegalArgumentException.class, () -> this.board.getCell(SIZE, SIZE));
+        assertThrows(IllegalArgumentException.class, () -> this.board.getCell(-1, -1));
+    }
+
+    @Test
     void testShowCell() {
         this.board.showCell(0, 0);
-        assertTrue(this.board.getCells().stream()
-                .filter(cell -> cell.getX() == 0 && cell.getY() == 0)
-                .findFirst()
-                .get()
-                .isShown());
+        this.board.showCell(3, 3);
+        assertTrue(this.board.getCell(0, 0).isShown());
+        assertTrue(this.board.getCell(3, 3).isShown());
     }
+
+    @Test
+    void testShowNotExistingCell() {
+        assertThrows(IllegalArgumentException.class, () -> this.board.showCell(SIZE, SIZE));
+        assertThrows(IllegalArgumentException.class, () -> this.board.showCell(-1, -1));
+    }
+
 
     @Test
     void testGetNeighbours() {
         var neighbours = Set.of(
-                new Cell(0, 1),
-                new Cell(1, 0),
-                new Cell(1, 1)
+                new Pair<>(0, 1),
+                new Pair<>(1, 0),
+                new Pair<>(1, 1)
         );
         assertEquals(neighbours, this.board.getNeighboursOf(0, 0));
 
         neighbours = new HashSet<>(List.of(
-                new Cell(2, 2),
-                new Cell(2, 3),
-                new Cell(2, 4),
-                new Cell(3, 2),
-                new Cell(3, 4),
-                new Cell(4, 2),
-                new Cell(4, 3),
-                new Cell(4, 4)
+                new Pair<>(2, 2),
+                new Pair<>(2, 3),
+                new Pair<>(2, 4),
+                new Pair<>(3, 2),
+                new Pair<>(3, 4),
+                new Pair<>(4, 2),
+                new Pair<>(4, 3),
+                new Pair<>(4, 4)
         ));
 
         assertEquals(neighbours, this.board.getNeighboursOf(3, 3));
 
         neighbours = new HashSet<>(List.of(
-                new Cell(SIZE- 2, SIZE - 2),
-                new Cell(SIZE - 2, SIZE - 1),
-                new Cell(SIZE - 1, SIZE - 2)
+                new Pair<>(SIZE - 2, SIZE - 2),
+                new Pair<>(SIZE - 2, SIZE - 1),
+                new Pair<>(SIZE - 1, SIZE - 2)
         ));
         assertEquals(neighbours, this.board.getNeighboursOf(SIZE - 1, SIZE - 1));
 

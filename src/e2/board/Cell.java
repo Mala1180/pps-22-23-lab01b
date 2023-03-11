@@ -1,15 +1,12 @@
 package e2.board;
 
-import e1.Pair;
-
-public class Cell extends Pair<Integer, Integer> {
+public class Cell {
 
     private boolean isShown;
     private boolean isMine;
 
-    public Cell(int x, int y) {
-        super(x, y);
-        this.isMine = false;
+    public Cell(final boolean isMine) {
+        this.isMine = isMine;
         this.isShown = false;
     }
 
@@ -25,8 +22,8 @@ public class Cell extends Pair<Integer, Integer> {
         return isShown;
     }
 
-    public void setShown(final boolean isShown) {
-        this.isShown = isShown;
+    public void show() {
+        this.isShown = true;
     }
 
 }

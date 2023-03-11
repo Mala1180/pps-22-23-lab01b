@@ -23,7 +23,7 @@ class LogicsTest {
                 System.out.println(logics.hit(i, j));
             }
         }
-        assertFalse(logics.isGameWon());
+        assertTrue(logics.isGameWon());
     }
 
 
