@@ -30,6 +30,16 @@ class BoardTest {
     }
 
     @Test
+    void testShowCell() {
+        this.board.showCell(0, 0);
+        assertTrue(this.board.getCells().stream()
+                .filter(cell -> cell.getX() == 0 && cell.getY() == 0)
+                .findFirst()
+                .get()
+                .isShown());
+    }
+
+    @Test
     void testGetNeighbours() {
         var neighbours = Set.of(
                 new Cell(0, 1),
