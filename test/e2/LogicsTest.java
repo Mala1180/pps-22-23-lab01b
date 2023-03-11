@@ -5,39 +5,57 @@ import e2.logics.LogicsImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import java.util.HashSet;
+import java.util.Set;
+
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class LogicsTest {
 
     public static final int SIZE = 7;
     public static final int NUMBER_OF_MINES = 3;
     private Logics logics;
+    public Set<Pair<Integer, Integer>> minePositions;
+
 
     @BeforeEach
     void setUp() {
-        logics = new LogicsImpl(SIZE);
+        minePositions = new HashSet<>(Set.of(
+                new Pair<>(0, 0),
+                new Pair<>(2, 2),
+                new Pair<>(5, 5)
+        ));
+        logics = new LogicsImpl(SIZE, minePositions);
+    }
+
+    @Test
+    void testHitMine() {
+        assertTrue(logics.hit(0, 0));
+    }
+
+    @Test
+    void testHitEmptyCell() {
+        assertFalse(logics.hit(1, 1));
     }
 
     @Test
     void testGameWon() {
         for (int i = 0; i < SIZE; i++) {
             for (int j = 0; j < SIZE; j++) {
-                System.out.println(logics.hit(i, j));
+                if (!minePositions.contains(new Pair<>(i, j))) {
+                    logics.hit(i, j);
+                }
             }
         }
         assertTrue(logics.isGameWon());
     }
 
-
-//    @Test
-//    void testHitMine() {
-//        assertFalse(logics.hit(0, 0));
-//    }
-//
-//    @Test
-//    void testHitEmptyCell() {
-//        assertTrue(logics.hit(2, 2));
-//    }
+    @Test
+    void testGameLost() {
+        logics.hit(0, 0);
+        assertFalse(logics.isGameWon());
+    }
 
 
 }

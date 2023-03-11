@@ -4,6 +4,7 @@ public class Cell {
 
     private boolean isShown;
     private boolean isMine;
+    private String label;
 
     public Cell(final boolean isMine) {
         this.isMine = isMine;
@@ -26,4 +27,12 @@ public class Cell {
         this.isShown = true;
     }
 
+    @Override
+    public String toString() {
+        return "Cell{" +
+                "isShown=" + isShown +
+                ", isMine=" + isMine +
+                ", label='" + label + '\'' +
+                '}';
+    }
 }

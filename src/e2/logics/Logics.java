@@ -15,4 +15,6 @@ public interface Logics {
     boolean isGameWon();
 
     boolean isMine(int x, int y);
+
+    String getLabel(int x, int y);
 }
