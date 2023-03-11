@@ -9,7 +9,7 @@ public class BoardImpl implements Board {
 
     private final Map<Pair<Integer, Integer>, Cell> cells = new HashMap<>();
 
-    private void populateCells(int size) {
+    private void populateBoard(int size) {
         for (int i = 0; i < size; i++) {
             for (int j = 0; j < size; j++) {
                 this.cells.put(new Pair<>(i, j), new Cell(false));
@@ -18,7 +18,7 @@ public class BoardImpl implements Board {
     }
 
     public BoardImpl(int size, int numberOfMines) {
-        populateCells(size);
+        populateBoard(size);
         Random random = new Random();
         for (int i = 0; i < numberOfMines; i++) {
             int x = random.nextInt(size);
@@ -28,11 +28,11 @@ public class BoardImpl implements Board {
     }
 
     public BoardImpl(int size) {
-        populateCells(size);
+        populateBoard(size);
     }
 
     public BoardImpl(int size, Set<e2.Pair<Integer, Integer>> minePositions) {
-        populateCells(size);
+        populateBoard(size);
         for (var mine : minePositions) {
             this.addMine(mine.getX(), mine.getY());
         }
