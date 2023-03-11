@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -30,11 +31,11 @@ class BoardTest {
 
     @Test
     void testGetNeighbours() {
-        var neighbours = new HashSet<>(List.of(
+        var neighbours = Set.of(
                 new Cell(0, 1),
                 new Cell(1, 0),
                 new Cell(1, 1)
-        ));
+        );
         assertEquals(neighbours, this.board.getNeighboursOf(0, 0));
 
         neighbours = new HashSet<>(List.of(

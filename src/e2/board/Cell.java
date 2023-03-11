@@ -2,40 +2,31 @@ package e2.board;
 
 import e1.Pair;
 
-import java.util.Objects;
+public class Cell extends Pair<Integer, Integer> {
 
-public class Cell {
-
-    private final Pair<Integer, Integer> position;
+    private boolean isShown;
     private boolean isMine;
 
     public Cell(int x, int y) {
-        this.position = new Pair<>(x, y);
+        super(x, y);
         this.isMine = false;
+        this.isShown = false;
     }
 
     public boolean isMine() {
         return isMine;
     }
 
-    public void setMine(boolean isMine) {
+    public void setMine(final boolean isMine) {
         this.isMine = isMine;
     }
 
-    public int getX() {
-        return this.position.getX();
+    public boolean isShown() {
+        return isShown;
     }
 
-    public int getY() {
-        return this.position.getY();
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Cell cell = (Cell) o;
-        return Objects.equals(position, cell.position);
+    public void setShown(final boolean isShown) {
+        this.isShown = isShown;
     }
 
 }
