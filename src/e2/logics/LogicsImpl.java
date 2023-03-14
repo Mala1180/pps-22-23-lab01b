@@ -3,7 +3,7 @@ package e2.logics;
 import e2.Pair;
 import e2.grid.Grid;
 import e2.grid.GridImpl;
-import e2.grid.cell.CellImpl;
+import e2.grid.cell.Cell;
 
 import java.util.Set;
 
@@ -46,11 +46,11 @@ public class LogicsImpl implements Logics {
     @Override
     public boolean isGameWon() {
         return this.grid.getCells().stream()
-                .filter(CellImpl::isMine)
+                .filter(Cell::isMine)
                 .anyMatch(cell -> !cell.isShown()) &&
                 this.grid.getCells().stream()
                         .filter(cell -> !cell.isMine())
-                        .allMatch(CellImpl::isShown);
+                        .allMatch(Cell::isShown);
     }
 
     @Override

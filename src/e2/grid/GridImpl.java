@@ -1,6 +1,7 @@
 package e2.grid;
 
 import e2.Pair;
+import e2.grid.cell.Cell;
 import e2.grid.cell.CellImpl;
 import e2.grid.cell.CellType;
 
@@ -9,7 +10,7 @@ import java.util.stream.Collectors;
 
 public class GridImpl implements Grid {
 
-    private final Map<Pair<Integer, Integer>, CellImpl> cells = new HashMap<>();
+    private final Map<Pair<Integer, Integer>, Cell> cells = new HashMap<>();
 
     private void populateBoard(int size, Set<Pair<Integer, Integer>> minePositions) {
         for (int i = 0; i < size; i++) {
@@ -43,12 +44,12 @@ public class GridImpl implements Grid {
     }
 
     @Override
-    public Set<CellImpl> getCells() {
+    public Set<Cell> getCells() {
         return new HashSet<>(this.cells.values());
     }
 
     @Override
-    public CellImpl getCell(final int i, final int j) {
+    public Cell getCell(final int i, final int j) {
         if (this.cells.containsKey(new Pair<>(i, j))) {
             return this.cells.get(new Pair<>(i, j));
         } else {

@@ -1,15 +1,15 @@
 package e2.grid;
 
 import e2.Pair;
-import e2.grid.cell.CellImpl;
+import e2.grid.cell.Cell;
 
 import java.util.Set;
 
 public interface Grid {
 
-    Set<CellImpl> getCells();
+    Set<Cell> getCells();
 
-    CellImpl getCell(int i, int j);
+    Cell getCell(int i, int j);
 
     void showCell(int i, int j);
 
